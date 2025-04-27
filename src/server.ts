@@ -21,11 +21,12 @@ export async function connectDB() {
 connectDB();
 const server = express();
 const corsOptions: CorsOptions = {
-  origin: function (origin, callBack) {
-    if (origin === process.env.FRONTEND_URL) {
-      callBack(null, true);
+  origin: function (origin, callback) {
+    console.log("Origin que llegó:", origin); // Para ver qué llega realmente
+    if (!origin || origin === process.env.FRONTEND_URL) {
+      callback(null, true);
     } else {
-      callBack(new Error("Error de Cors"));
+      callback(new Error("Error de Cors"));
     }
   },
 };
